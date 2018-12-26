@@ -2,3 +2,4 @@
 2. Only user who posted comment can delete it.
 3. Add external sentiment analysis APIs for blogs.
 4. Add external dictionary API.
+5. Before posting blog, check if author_id is correct or not.

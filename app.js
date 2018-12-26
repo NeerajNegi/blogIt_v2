@@ -38,10 +38,12 @@ app.use(morgan('dev'));
 app.use(express.static(path.join(__dirname, 'public')));
 
 //routes
-app.use('/api/user', user);
+app.use('/api/users', user);
 app.use('/api/blogs', blog);
-app.use('/api/comment', comment);
+app.use('/api/comments', comment);
 
 app.listen(port,()=>{
 	console.log("Server running at port: " + port);
 });
+
+module.exports = app;
