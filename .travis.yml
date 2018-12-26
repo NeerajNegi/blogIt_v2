@@ -10,4 +10,4 @@ deploy:
     secure: 4d7dc316-6bc9-4ea6-a1c1-390731442e61
   app: blogitneeraj
   on:
-    repo: neerajnegi/blogIt_v2
+    repo: NeerajNegi/blogIt_v2
