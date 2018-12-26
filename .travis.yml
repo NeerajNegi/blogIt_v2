@@ -4,3 +4,8 @@ node_js:
 cache:
   directories:
     - "node_modules"
+deploy:
+  provider: heroku
+  api_key:
+    secure: "4d7dc316-6bc9-4ea6-a1c1-390731442e61"
+    app: blogitneeraj
