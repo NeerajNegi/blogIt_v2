@@ -9,3 +9,7 @@ Full stack blogging platform made with MEAN stack
 
 ### Demo
 https://blogitneeraj.herokuapp.com
+
+
+## Travis CI
+[![Build Status](https://travis-ci.com/NeerajNegi/blogIt_v2.svg?branch=master)](https://travis-ci.com/NeerajNegi/blogIt_v2)
