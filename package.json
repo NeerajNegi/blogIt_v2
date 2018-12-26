@@ -4,6 +4,7 @@
   "description": "simple mean application",
   "main": "app.js",
   "scripts": {
+    "start": "node app.js",
     "test": "mocha --timeout 10000"
   },
   "author": "Neeraj Negi",
