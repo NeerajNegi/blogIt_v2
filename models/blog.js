@@ -1,0 +1,26 @@
+const mongoose = require('mongoose');
+
+const BlogSchema = mongoose.Schema({ 
+	author_id: String,
+	author_name: String,
+	content:{
+		type: String,
+		required: true
+	},
+	title: String,
+	likes: [String]
+});
+
+BlogSchema.methods.like = function(user_id){
+	const pos = this.likes.indexOf(user_id);
+	if( pos === -1) {
+		// add user id to likes array for a fresh like
+		this.likes.push(user_id);
+	} else {
+		//if likes array contains user id then remove it 
+		// i.e. double click to dislike
+		this.likes.splice(pos, 1);
+	}
+}
+
+const Blog = module.exports = mongoose.model('Blog', BlogSchema);

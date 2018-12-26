@@ -1,0 +1,4 @@
+1. Only user who posted the blog can delete it.
+2. Only user who posted comment can delete it.
+3. Add external sentiment analysis APIs for blogs.
+4. Add external dictionary API.
