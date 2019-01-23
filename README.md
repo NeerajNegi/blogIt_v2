@@ -1,6 +1,8 @@
 # Blog It
 Full stack blogging platform made with MEAN stack
 
+This Repo only contains Backend
+
 ### Features
 * Create and publish blogs
 * See blogs from other users
