@@ -52,24 +52,26 @@ router.post('/', validateToken, (req, res)=>{
 	newBlog.author_id = req.body.author_id;
 	newBlog.author_name = req.body.author_name;
 	newBlog.content = req.body.content;
+	newBlog.created_at = req.body.created_at;
 	newBlog.title = req.body.title;
 
 	newBlog.save((err)=>{
 		if(err){
 			console.log(err);
 			res.status(400).send({
-				msg: 'Failed to add Blog'
+				message: 'Failed to add Blog'
 			});
 		} else {
 			console.log("Blog added");
 			res.status(200).send({
-				msg: 'Blog Added'
+				message: 'Blog Added'
 			});
 		}
 	});
 });
 
 //update blog
+//Check whether the user who is editing the blog is its author or not
 router.put('/:id', validateToken, (req, res)=>{
 	Blog.findOne({_id: req.params.id}, function(err, blog){
 		if(err){
@@ -160,6 +162,7 @@ router.get('/:id', validateToken, (req, res)=>{
 });
 
 //deleting Blog
+//validate that user deleting the blog is its author or not
 router.delete('/:id', validateToken, (req, res)=>{
 	Blog.deleteOne({_id: req.params.id}, (err, result)=>{
 		if(err){

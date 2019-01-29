@@ -28,9 +28,14 @@ router.post('/login', (req, res)=>{
 				console.log("User logged in");
 				return res.status(201).send({
 					message: "User Logged In",
-					displayName: user.first_name + " " + user.last_name,
-					token: token,
-					id: user.id
+					userInfo: {
+						email: user.email,
+						id: user._id,
+						firstName: user.first_name,
+						lastName: user.last_name,
+						photoUrl: user.photoUrl
+					},
+					token: token
 				});
 			} else {
 				console.log("Wrong password");
@@ -53,9 +58,10 @@ router.post('/',(req, res)=>{
 		} else {
 			let newUser = new User();
 
-			newUser.first_name = req.body.first_name,
-			newUser.last_name = req.body.last_name,
+			newUser.first_name = req.body.first_name
+			newUser.last_name = req.body.last_name
 			newUser.email = req.body.email
+			newUser.photoUrl = req.body.photoUrl
 
 			newUser.setPassword(req.body.password);
 
