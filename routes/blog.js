@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const generateToken = require('../middlewares/generateToken');
 const validateToken = require('../middlewares/validateToken');
+const request = require('request');
 
 //importing Blog Schema
 const Blog = require('../models/blog');
@@ -128,21 +129,38 @@ router.post('/like/:id', validateToken, (req, res)=>{
 	});
 });
 
-// //get all comments for a blog
-// router.get('/comments/:blogId', validateToken,  (req, res) => {
-//     Comment.find({blogId: req.params.blogId}, (err, comments) => {
-//         if(err) {
-//             res.status(400).send({
-//                 message : 'Error getting the comment'
-//             })
-//         } else {
-//             res.status(200).send({
-//                 message: 'Comments received',
-//                 comments
-//             })
-//         }
-//     })
-// })
+router.get('/findWords/:word', (req, res) => {
+	const word = encodeURIComponent(req.params.word);
+	const options = {
+		url: 'https://api.datamuse.com/words?ml=' + word
+	};
+
+	function callback(err, response, body) {
+		if (err) {
+			console.log(err);
+			return res.status(400).send({
+				message: 'Some internal Error Occured'
+			});
+		} else {
+			if (response.statusCode === 200) {
+				let result = JSON.parse(body).slice(0, 10);
+				result = result.map((r) => {
+					return r.word;
+				});
+				res.status(201).send({
+					words: result
+				})
+			} else {
+				console.log('\n Error while calling the api...');
+				return res.status(400).send({
+					message: 'Oops, an internal error occured'
+				});
+			}
+		}
+	}
+
+	request.get(options, callback);
+})
 
 //get single blog
 router.get('/:id', validateToken, (req, res)=>{
