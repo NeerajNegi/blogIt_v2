@@ -1,9 +1,10 @@
 const mongoose = require('mongoose');
 
 const BlogSchema = mongoose.Schema({ 
-	author_id: String,
-	author_name: String,
-	created_at: String,
+	authorId: String,
+	imageUrl: String,
+	authorName: String,
+	createdAt: String,
 	content:{
 		type: String,
 		required: true
@@ -12,11 +13,11 @@ const BlogSchema = mongoose.Schema({
 	likes: [String]
 });
 
-BlogSchema.methods.like = function(user_id){
-	const pos = this.likes.indexOf(user_id);
+BlogSchema.methods.like = function(userId){
+	const pos = this.likes.indexOf(userId);
 	if( pos === -1) {
 		// add user id to likes array for a fresh like
-		this.likes.push(user_id);
+		this.likes.push(userId);
 	} else {
 		//if likes array contains user id then remove it 
 		// i.e. double click to dislike

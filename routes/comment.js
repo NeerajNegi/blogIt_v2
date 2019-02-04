@@ -32,9 +32,9 @@ router.post('/:blogId', validateToken, (req, res) => {
                 let newComment = new Comment();
                 newComment.title = req.body.title,
                 newComment.content = req.body.content,
-                newComment.blog_id = blog._id,
-                newComment.author_id = req.body.author_id,
-                newComment.author_name = req.body.author_name
+                newComment.blogId = req.params.blogId,
+                newComment.authorId = req.body.authorId,
+                newComment.authorName = req.body.authorName
                 newComment.save((e, comment) => {
                     if(e) {
                         res.status(400).send({
@@ -57,8 +57,8 @@ router.post('/:blogId', validateToken, (req, res) => {
 })
 
 //get all comments for a blog
-router.get('/:commentId', validateToken, (req, res) => {
-    Comment.find({blog_id: req.params.commentId}, (err, comments) => {
+router.get('/:blogId', validateToken, (req, res) => {
+    Comment.find({blogId: req.params.blogId}, (err, comments) => {
         if(err) {
             res.status(400).send({
                 message : 'Error getting the comment'

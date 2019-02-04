@@ -5,7 +5,7 @@ const validateToken = require('../middlewares/validateToken');
 
 //importing Blog Schema
 const Blog = require('../models/blog');
-const Comment = require('../models/comment');
+// const Comment = require('../models/comment');
 
 //Get All Blogs
 router.get('/', (req, res) => {
@@ -25,7 +25,7 @@ router.get('/', (req, res) => {
 
 //Get own Blogs
 router.get('/ownblogs/:id', validateToken, (req, res)=>{
-	Blog.find({author_id: req.params.id}, (err, blogs) => {
+	Blog.find({authorId: req.params.id}, (err, blogs) => {
 		if(err){
 			res.status(400).send({
 				message: "Error Occured"
@@ -47,13 +47,14 @@ router.get('/ownblogs/:id', validateToken, (req, res)=>{
 
 //add new Blog
 router.post('/', validateToken, (req, res)=>{
+
 	let newBlog = new Blog();
-	
-	newBlog.author_id = req.body.author_id;
-	newBlog.author_name = req.body.author_name;
+	newBlog.authorId = req.body.authorId;
+	newBlog.authorName = req.body.authorName;
 	newBlog.content = req.body.content;
-	newBlog.created_at = req.body.created_at;
+	newBlog.createdAt = req.body.createdAt;
 	newBlog.title = req.body.title;
+	newBlog.imageUrl = req.body.imageUrl;
 
 	newBlog.save((err)=>{
 		if(err){
@@ -109,7 +110,7 @@ router.post('/like/:id', validateToken, (req, res)=>{
 				message: "Some error has occured."
 			});
 		} else {
-			blog.like(req.body.user_id);
+			blog.like(req.body.userId);
 			blog.save((err, blog)=>{
 				if(err){
 					console.log(err);
@@ -127,21 +128,21 @@ router.post('/like/:id', validateToken, (req, res)=>{
 	});
 });
 
-//get all comments for a blog
-router.get('/comments/:blogId', validateToken,  (req, res) => {
-    Comment.find({blog_id: req.params.blogId}, (err, comments) => {
-        if(err) {
-            res.status(400).send({
-                message : 'Error getting the comment'
-            })
-        } else {
-            res.status(200).send({
-                message: 'Comments received',
-                comments
-            })
-        }
-    })
-})
+// //get all comments for a blog
+// router.get('/comments/:blogId', validateToken,  (req, res) => {
+//     Comment.find({blogId: req.params.blogId}, (err, comments) => {
+//         if(err) {
+//             res.status(400).send({
+//                 message : 'Error getting the comment'
+//             })
+//         } else {
+//             res.status(200).send({
+//                 message: 'Comments received',
+//                 comments
+//             })
+//         }
+//     })
+// })
 
 //get single blog
 router.get('/:id', validateToken, (req, res)=>{
