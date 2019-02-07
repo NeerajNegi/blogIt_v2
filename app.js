@@ -49,7 +49,7 @@ app.use('/api/suggestions', suggestion);
 const http = require("http");
 setInterval(function() {
     http.get("http://blogitneeraj.herokuapp.com/api/blogs");
-}, 1000*60*50);
+}, 1000*60*30);
 
 app.listen(port,()=>{
 	console.log("Server running at port: " + port);
