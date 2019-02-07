@@ -45,6 +45,12 @@ app.use('/api/blogs', blog);
 app.use('/api/comments', comment);
 app.use('/api/suggestions', suggestion);
 
+// To keep free heroku app alive
+var http = require("http");
+setInterval(function() {
+    http.get("http://blogitneeraj.herokuapp.com/api/blogs");
+}, 300000);
+
 app.listen(port,()=>{
 	console.log("Server running at port: " + port);
 });
