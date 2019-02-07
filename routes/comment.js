@@ -33,8 +33,8 @@ router.post('/:blogId', validateToken, (req, res) => {
                 newComment.title = req.body.title,
                 newComment.content = req.body.content,
                 newComment.blogId = req.params.blogId,
-                newComment.authorId = req.body.authorId,
-                newComment.authorName = req.body.authorName
+                newComment.authorId = req.body.authorId
+
                 newComment.save((e, comment) => {
                     if(e) {
                         res.status(400).send({
@@ -74,8 +74,8 @@ router.get('/:blogId', validateToken, (req, res) => {
 
 
 //delete a comment
-router.delete('/:blogId/:commentid', validateToken, (req, res) => {
-    Blog.find({_id: req.params.id}, (err, blog) => {
+router.delete('/:blogId/:commentId', validateToken, (req, res) => {
+    Blog.find({_id: req.params.blogId}, (err, blog) => {
         if(err) {
             res.status(400).send({
                 message : 'some error occured'

@@ -25,8 +25,8 @@ router.get('/', (req, res) => {
 });
 
 //Get own Blogs
-router.get('/ownblogs/:id', validateToken, (req, res)=>{
-	Blog.find({authorId: req.params.id}, (err, blogs) => {
+router.get('/ownblogs/:userId', validateToken, (req, res)=>{
+	Blog.find({authorId: req.params.userId}, (err, blogs) => {
 		if(err){
 			res.status(400).send({
 				message: "Error Occured"
@@ -51,7 +51,6 @@ router.post('/', validateToken, (req, res)=>{
 
 	let newBlog = new Blog();
 	newBlog.authorId = req.body.authorId;
-	newBlog.authorName = req.body.authorName;
 	newBlog.content = req.body.content;
 	newBlog.createdAt = req.body.createdAt;
 	newBlog.title = req.body.title;
@@ -84,6 +83,7 @@ router.put('/:id', validateToken, (req, res)=>{
 		} else {
 			blog.content = req.body.content;
 			blog.title = req.body.title;
+			blog.imageUrl = req.body.imageUrl;
 
 			blog.save((e, b)=>{
 				if(e){
@@ -103,8 +103,8 @@ router.put('/:id', validateToken, (req, res)=>{
 });
 
 //Like/Dislike Blog
-router.post('/like/:id', validateToken, (req, res)=>{
-	Blog.findOne({_id: req.params.id}, function(err, blog){
+router.post('/like/:blogId', validateToken, (req, res)=>{
+	Blog.findOne({_id: req.params.blogId}, function(err, blog){
 		if(blog == null){
 			console.log(err);
 			res.status(400).send({

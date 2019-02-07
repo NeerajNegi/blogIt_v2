@@ -3,7 +3,6 @@ const mongoose = require('mongoose');
 const BlogSchema = mongoose.Schema({ 
 	authorId: String,
 	imageUrl: String,
-	authorName: String,
 	createdAt: String,
 	content:{
 		type: String,

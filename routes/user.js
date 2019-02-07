@@ -31,8 +31,8 @@ router.post('/login', (req, res)=>{
 					userInfo: {
 						email: user.email,
 						id: user._id,
-						firstName: user.first_name,
-						lastName: user.last_name,
+						firstName: user.firstName,
+						lastName: user.lastName,
 						photoUrl: user.photoUrl
 					},
 					token: token
@@ -58,8 +58,8 @@ router.post('/',(req, res)=>{
 		} else {
 			let newUser = new User();
 
-			newUser.first_name = req.body.first_name
-			newUser.last_name = req.body.last_name
+			newUser.firstName = req.body.firstName
+			newUser.lastName = req.body.lastName
 			newUser.email = req.body.email
 			newUser.photoUrl = req.body.photoUrl
 
@@ -92,8 +92,8 @@ router.put('/:id', validateToken, (req, res) => {
 		} else {
 			if(user.length > 0) {
 				console.log(user);
-				user.first_name = req.body.first_name,
-				user.last_name = req.body.last_name
+				user.firstName = req.body.firstName,
+				user.lastName = req.body.lastName
 
 				user.save( (e, u) => {
 					if(e) {
