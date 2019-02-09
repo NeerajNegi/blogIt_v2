@@ -6,6 +6,7 @@ const request = require('request');
 
 //importing Blog Schema
 const Blog = require('../models/blog');
+const User = require('../models/user');
 // const Comment = require('../models/comment');
 
 //Get All Blogs
@@ -16,6 +17,7 @@ router.get('/', (req, res) => {
 				message: "Some error has occured."
 			});
 		} else {
+			// blogs.
 			res.status(200).send({
 				message: "Blogs received",
 				blogs

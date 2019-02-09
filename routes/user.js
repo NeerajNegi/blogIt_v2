@@ -64,16 +64,23 @@ router.post('/',(req, res)=>{
 			newUser.photoUrl = req.body.photoUrl
 
 			newUser.setPassword(req.body.password);
+			
+			const loginData = {
+				email: req.body.email,
+				password: req.body.password
+			}
 
 			newUser.save( (err, User)=>{
 				if(err){
 					console.log(err);
 					return res.status(400).send({
 						message: "Failed to add user."
+						
 					});
 				} else {
 					return res.status(201).send({
-						message: "User added succesfully."
+						message: "User added succesfully.",
+						user: loginData
 					});
 				}
 			});
